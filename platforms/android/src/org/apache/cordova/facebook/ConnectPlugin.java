@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,6 +31,7 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.AppEventsLogger;
 import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.WebDialog;
@@ -217,6 +219,11 @@ public class ConnectPlugin extends CordovaPlugin {
 				callbackContext
 					.error("No valid session found, must call init and login before logout.");
 			}
+			return true;
+		} else if (action.equals("activateApp")) {
+			Context context = cordova.getActivity().getApplicationContext();
+			AppEventsLogger.activateApp(context, applicationId);
+			callbackContext.success("");
 			return true;
 		} else if (action.equals("showDialog")) {
 			Bundle collect = new Bundle();

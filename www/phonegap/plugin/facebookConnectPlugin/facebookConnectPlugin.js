@@ -90,6 +90,10 @@ if (!window.cordova) {
 
         api: function (graphPath, permissions, s, f) {
             cordova.exec(s, f, "FacebookConnectPlugin", "graphApi", [graphPath, permissions]);
+        },
+
+        activateApp: function (s, f) {
+            cordova.exec(s, f, "FacebookConnectPlugin", "activateApp", []);
         }
     };
 
